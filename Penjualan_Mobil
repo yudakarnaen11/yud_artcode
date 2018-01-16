@@ -1,0 +1,87 @@
+public class LatihanUAS {
+
+    public static void main(String[] args) {
+
+        System.out.println("Pembelian Mobil");
+
+        String data[][] = {
+            {"No", "MerkMobil", "Harga"},
+            {"1", "AVANZA", "60000000"},
+            {"2", "TOYOTA", "50000000"}};
+
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data.length; j++) {
+                System.out.print(data[i][j] + "\t");
+            }
+            System.out.println("");
+        }
+
+        System.out.println("########################");
+
+        //pencarian
+        Scanner isi = new Scanner(System.in);
+        String cari, yud;
+        boolean beli = true;
+        long harga = 0, total = 0, subTotal = 0;
+        int bar = 0, jumlahBeli = 0, y = 1, u=3;
+        String output[][] = new String[u][4];
+
+        do {
+            System.out.print("Cari MerkMobil : ");
+            cari = isi.next();
+
+            for (int i = 0; i < data.length; i++) {
+                if (cari.equalsIgnoreCase(data[i][1])) {
+                    bar = i;
+                }
+            }
+            //input jumlah beli
+            System.out.print("Jumlah Beli : ");
+            jumlahBeli = isi.nextInt();
+
+            //hitung subtotal
+            harga = Integer.valueOf(data[bar][2]);
+            total = jumlahBeli * harga;
+
+            System.out.println("");
+            System.out.println("Merek : " + cari);
+            System.out.println("Harga : " + harga);
+            System.out.println("Jumlah : " + jumlahBeli);
+            System.out.println("Total : " + total);
+
+            subTotal = subTotal + total;
+
+            System.out.print("Beli Lagi? (Y/N) : ");
+            yud = isi.next();
+            if (yud.equalsIgnoreCase("y")) {
+                beli = true;
+            } else if (yud.equalsIgnoreCase("n")) {
+                beli = false;
+            }
+
+            output[y][0] = cari;
+            output[y][1] = String.valueOf(harga);
+            output[y][2] = String.valueOf(jumlahBeli);
+            output[y][3] = String.valueOf(total);
+            y++;
+            if (y>2) {
+                u++;
+            }
+        } while (beli);
+
+        output[0][0] = "Merek";
+        output[0][1] = "Harga";
+        output[0][2] = "\tJumlah";
+        output[0][3] = "Total";
+        System.out.println("");
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(output[i][j] + "\t");
+            }
+            System.out.println("");
+        }
+        System.out.println("------------------------");
+        System.out.println("Total Bayar " + subTotal);
+    }
+}
